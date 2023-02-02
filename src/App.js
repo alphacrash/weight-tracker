@@ -1,13 +1,16 @@
+import { Box, Container } from "@mui/material";
 import "./App.css";
 import { LineChart } from "./components/LineChart";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <LineChart />
-      </header>
-    </div>
+    <Box className="App">
+      <Box className="App-header">
+        <Container>
+          <LineChart />
+        </Container>
+      </Box>
+    </Box>
   );
 }
 
