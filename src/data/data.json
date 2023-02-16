@@ -15,7 +15,7 @@
   { "date": "12-Feb", "expected": 82.46, "actual": 82.6 },
   { "date": "13-Feb", "expected": 82.4, "actual": 82.6 },
   { "date": "14-Feb", "expected": 82.33, "actual": 82.6 },
-  { "date": "15-Feb", "expected": 82.26, "actual": 82.3 },
+  { "date": "15-Feb", "expected": 82.26, "actual": 82.35 },
   { "date": "16-Feb", "expected": 82.19, "actual": 81.78 },
   { "date": "17-Feb", "expected": 82.12, "actual": 0 },
   { "date": "18-Feb", "expected": 82.06, "actual": 0 },
