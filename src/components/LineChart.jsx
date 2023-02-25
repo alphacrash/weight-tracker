@@ -49,6 +49,8 @@ const actual = weightData.map(weight => {
     }
 });
 
+const dateLine = weightData.map(weight => new Date(weight.date + new Date().getFullYear()) <= new Date() ? 72 : 84)
+
 export const data = {
     labels,
     datasets: [
@@ -63,6 +65,12 @@ export const data = {
             data: expected,
             borderColor: 'rgb(53, 162, 235)',
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+        {
+            label: 'Date',
+            data: dateLine,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
         },
     ],
 };
