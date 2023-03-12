@@ -1,75 +1,66 @@
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import weightData from "../data/data.json";
+    CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title,
+    Tooltip
+} from "chart.js";
+import { useEffect } from "react";
+import { Line } from "react-chartjs-2";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWeights } from "../slices/weightSlice";
 
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
 );
 
-export const options = {
+const LineChart = () => {
+  const dispatch = useDispatch();
+  const weightData = useSelector((state) => state.weight.value);
+
+  useEffect(() => {
+    dispatch(fetchWeights());
+  }, [dispatch]);
+
+  const options = {
     responsive: true,
     plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'SUD - Weight Change',
-        },
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "SUD - Weight Change",
+      },
     },
-};
+  };
 
-const labels = weightData.map(weight => weight.date);
-const expected = weightData.map(weight => weight.expected);
+  const labels = weightData.map((weight) => weight?.date);
+  const expected = weightData.map((weight) => weight?.expected);
+  const actual = weightData.map((weight) => weight?.actual !== 0 ? weight.actual : null);
 
-let lastHigh = 0;
-const actual = weightData.map(weight => {
-    if (weight.actual !== 0) {
-        lastHigh = weight.actual;
-    }
-    if (weight.actual !== 0) {
-        return weight.actual;
-    } else {
-        // return lastHigh;
-        return 65;
-    }
-});
-
-const dateLine = weightData.map(weight => new Date(weight.date + new Date().getFullYear()) <= new Date() ? 72 : 84);
-
-export const data = {
+  const data = {
     labels,
     datasets: [
-        {
-            label: 'Actual',
-            data: actual,
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Expected',
-            data: expected,
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        }
+      {
+        label: "Actual",
+        data: actual,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "Expected",
+        data: expected,
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
     ],
+  };
+
+  return <Line options={options} data={data} />;
 };
 
-export function LineChart() {
-    return <Line options={options} data={data} />;
-}
+export default LineChart;
