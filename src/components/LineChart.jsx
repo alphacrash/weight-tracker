@@ -36,7 +36,6 @@ export const options = {
 
 const labels = weightData.map(weight => weight.date);
 const expected = weightData.map(weight => weight.expected);
-const actualx = weightData.map(weight => weight.actual);
 
 let lastHigh = 0;
 const actual = weightData.map(weight => {
@@ -46,18 +45,19 @@ const actual = weightData.map(weight => {
     if (weight.actual !== 0) {
         return weight.actual;
     } else {
-        return lastHigh;
+        // return lastHigh;
+        return 65;
     }
 });
 
-const dateLine = weightData.map(weight => new Date(weight.date + new Date().getFullYear()) <= new Date() ? 72 : 84)
+const dateLine = weightData.map(weight => new Date(weight.date + new Date().getFullYear()) <= new Date() ? 72 : 84);
 
 export const data = {
     labels,
     datasets: [
         {
             label: 'Actual',
-            data: actualx,
+            data: actual,
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
@@ -66,13 +66,7 @@ export const data = {
             data: expected,
             borderColor: 'rgb(53, 162, 235)',
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-        {
-            label: 'Date',
-            data: dateLine,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        },
+        }
     ],
 };
 
