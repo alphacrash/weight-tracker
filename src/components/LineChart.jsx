@@ -36,6 +36,7 @@ export const options = {
 
 const labels = weightData.map(weight => weight.date);
 const expected = weightData.map(weight => weight.expected);
+const actualx = weightData.map(weight => weight.actual);
 
 let lastHigh = 0;
 const actual = weightData.map(weight => {
@@ -56,7 +57,7 @@ export const data = {
     datasets: [
         {
             label: 'Actual',
-            data: actual,
+            data: actualx,
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
